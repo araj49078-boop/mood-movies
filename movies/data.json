@@ -1,0 +1,35 @@
+{
+    "happy": [
+        {
+            "title": "Zindagi Na Milegi Dobara",
+            "image": "https://i.imgur.com/znmd.jpg",
+            "link": "#"
+        },
+        {
+            "title": "3 Idiots",
+            "image": "https://i.imgur.com/3idiots.jpg",
+            "link": "#"
+        }
+    ],
+    "sad": [
+        {
+            "title": "Tamasha",
+            "image": "https://i.imgur.com/tamasha.jpg",
+            "link": "#"
+        }
+    ],
+    "romantic": [
+        {
+            "title": "Yeh Jawaani Hai Deewani",
+            "image": "https://i.imgur.com/yjhd.jpg",
+            "link": "#"
+        }
+    ],
+    "thriller": [
+        {
+            "title": "Drishyam",
+            "image": "https://i.imgur.com/drishyam.jpg",
+            "link": "#"
+        }
+    ]
+}
