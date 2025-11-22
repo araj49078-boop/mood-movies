@@ -1,160 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>MoodFlix</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #0f1720;
-            color: #e6eef8;
-            text-align: center;
-            padding: 30px;
-        }
-        h1 { margin-bottom: 6px; }
-        p.lead { color:#9fb2c8; margin-bottom: 20px; }
-
-        /* MOOD BUTTONS */
-        .mood-grid {
-            display:flex;
-            gap:12px;
-            flex-wrap:wrap;
-            justify-content:center;
-            max-width:720px;
-            margin:0 auto;
-        }
-        .mood-box {
-            background:#0b1220;
-            border:1px solid #213443;
-            padding:18px;
-            border-radius:12px;
-            width:120px;
-            cursor:pointer;
-            user-select:none;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.45);
-            transition: 0.18s;
-        }
-        .mood-box:hover {
-            transform: translateY(-4px);
-        }
-
-        /* MOVIE CARDS */
-        .movies {
-            margin-top:28px;
-            text-align:left;
-            max-width:900px;
-            margin-left:auto;
-            margin-right:auto;
-        }
-        .movie {
-            background:#07101a;
-            padding:12px;
-            margin:8px 0;
-            border-radius:8px;
-            border:1px solid #12313f;
-        }
-    </style>
+    <title>Mood Movies</title>
+    <link rel="stylesheet" href="styles/style.css">
 </head>
-
 <body>
-    <h1>🎭 MoodFlix</h1>
-    <p class="lead">Pick a mood and we’ll show you movies for that vibe. (You can skip)</p>
+    <nav class="navbar">
+        <h2>Mood Movies</h2>
+        <button onclick="logoutUser()">Logout</button>
+    </nav>
 
-    <!-- MOOD BUTTONS -->
-    <div class="mood-grid">
-        <div class="mood-box" onclick="showMovies('sad')">😢 Sad</div>
-        <div class="mood-box" onclick="showMovies('motivation')">🔥 Motivated</div>
-        <div class="mood-box" onclick="showMovies('comedy')">😂 Comedy</div>
-        <div class="mood-box" onclick="showMovies('romantic')">❤️ Romantic</div>
-        <div class="mood-box" onclick="showMovies('thriller')">😱 Thriller</div>
-        <div class="mood-box" onclick="showMovies('chill')">🌙 Relax</div>
-        <div class="mood-box" onclick="showMovies('bored')">🥱 Bored</div>
-    </div>
-
-    <!-- SKIP BUTTON -->
-    <div style="margin-top:18px">
-        <button onclick="showAll()" style="padding:10px 16px; border-radius:8px; border:none; cursor:pointer;">
-            Skip / Show All
-        </button>
-    </div>
-
-    <!-- MOVIE LIST -->
-    <div class="movies" id="movieList"></div>
-
-<script>
-/* MOVIE DATA */
-const movies = {
-    sad: [
-        { title:"3 Idiots", info:"Emotional / Inspiring" },
-        { title:"The Pursuit of Happyness", info:"True story / Heartfelt" },
-        { title:"Chhichhore", info:"Bittersweet / Youth story" }
-    ],
-
-    motivation: [
-        { title:"Rocky", info:"Underdog / Boxing" },
-        { title:"Dangal", info:"Biopic / Sports" },
-        { title:"MS Dhoni", info:"True story / Cricket" }
-    ],
-
-    comedy: [
-        { title:"Hera Pheri", info:"Classic comedy" },
-        { title:"Dhamaal", info:"Funny adventure" },
-        { title:"Phir Hera Pheri", info:"Comedy sequel" }
-    ],
-
-    romantic: [
-        { title:"Aashiqui 2", info:"Romantic / Musical" },
-        { title:"Yeh Jawaani Hai Deewani", info:"Love / Adventure" }
-    ],
-
-    thriller: [
-        { title:"Kahaani", info:"Suspense / Mystery" },
-        { title:"Drishyam", info:"Crime / Thriller" },
-        { title:"Gone Girl", info:"Psychological thriller" }
-    ],
-
-    chill: [
-        { title:"Walter Mitty", info:"Feel good / Calm" },
-        { title:"Amelie", info:"Warm / Cozy" }
-    ],
-
-    bored: [
-        { title:"Guardians of the Galaxy", info:"Fun / Action" },
-        { title:"Jumanji", info:"Adventure" }
-    ]
-};
-
-/* BUILD MOVIE CARD */
-function buildMovieHTML(item) {
-    return `
-        <div class="movie">
-            <strong>${item.title}</strong>
-            <div style="color:#9fb2c8; font-size:13px;">${item.info}</div>
+    <section class="mood-section">
+        <h3>Select Your Mood</h3>
+        <div class="moods">
+            <button onclick="loadMovies('happy')">😊 Happy</button>
+            <button onclick="loadMovies('sad')">😢 Sad</button>
+            <button onclick="loadMovies('romantic')">❤️ Romantic</button>
+            <button onclick="loadMovies('thriller')">😱 Thriller</button>
         </div>
-    `;
-}
+    </section>
 
-/* SHOW MOVIES BY MOOD */
-function showMovies(mood) {
-    const list = movies[mood] || [];
-    const html = `<h2>Movies for: ${mood}</h2>` + list.map(buildMovieHTML).join("");
-    document.getElementById("movieList").innerHTML = html;
-    window.scrollTo({ top: document.getElementById("movieList").offsetTop - 20, behavior: 'smooth' });
-}
+    <section id="movies-container"></section>
 
-/* SHOW ALL MOVIES */
-function showAll() {
-    let html = "<h2>All Movies</h2>";
-    for (const mood in movies) {
-        html += `<h3 style="margin-top:12px; color:#d4eefb;">${mood}</h3>` +
-                movies[mood].map(buildMovieHTML).join("");
-    }
-    document.getElementById("movieList").innerHTML = html;
-    window.scrollTo({ top: document.getElementById("movieList").offsetTop - 20, behavior: 'smooth' });
-}
-</script>
-
+    <script src="firebase.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
+
+
